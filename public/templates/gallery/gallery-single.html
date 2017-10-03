@@ -1,0 +1,16 @@
+<div ng-include="templates.nav"></div>
+<div class="row">
+	<div class ="col-sm-12">
+		<h1 class="page-header">View Gallery</h1>
+		<h2>{{singleGallery.name}}</h3>
+		<b>Created at {{singleGallery.created_at}}</b>
+	</div>
+<div class="row">
+  <div class="col-sm-12">
+    <form action="/file-upload"
+    class="dropzone"
+    dropzone="dropzoneConfig"
+    id="my-awesome-dropzone"></form>
+  </div>
+</div>
+</div>

@@ -1,0 +1,19 @@
+
+<div ng-include="templates.nav"></div>
+<div class="row">
+	<div class="col-sm-12">
+		<h1 class="page-header">Add Gallery</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12"><!-- 
+		 saveNewGallery(addGalleryform) taken from name="addGalleryform"  -->
+		<form ng-submit="saveNewGallery(addGalleryform)" name="addGalleryform" novalidate>
+			<div class="form-group " ng-class="{'has-error': addGalleryform.$invalid && formSubmitted}">
+				<input type="text" name="galleryName" id="galleryName" required ng-minlength="3"id="Enter Gallery Name" class="form-control" ng-model="newGallery.name">
+				
+			</div>
+				<button class="btn btn-primary"> save</button>
+		</form>
+	</diV>
+</div>

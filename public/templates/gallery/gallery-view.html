@@ -1,0 +1,23 @@
+
+<div ng-include="templates.nav"></div>
+<div class="row">
+	<div class ="col-sm-12">
+		<h1 class="page-header">List Gallery</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-3" ng-repeat="gallery in galleries" >
+		<a href="#!/gallery/view/{{gallery.id}}">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div class="panel-title">{{gallery.name}}</div>
+				</div>
+				<div class="panel-body">
+					Created by : <strong>{{gallery.user.name}}</strong>
+					<br/>
+					<strong>{{gallery.created_at}}</strong>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>

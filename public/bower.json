@@ -1,0 +1,20 @@
+{
+  "name": "bower",
+  "description": "bower",
+  "main": "bower",
+  "keywords": [
+    "bower"
+  ],
+  "authors": [
+    "bower"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "angular-route": "^1.6.6",
+    "bootstrap": "^3.3.7",
+    "angular-cookies": "^1.6.6",
+    "dropzone": "^5.1.1"
+  }
+}
