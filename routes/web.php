@@ -18,6 +18,7 @@ Route::get('gallerylist','GalleryController@index');
 Route::post('auth','UserController@auth');
 Route::post('galleryadd','GalleryController@add');
 Route::get('galleryget/{user}','GalleryController@show');
-Route::post('uploadfile',function(){
-	return response('Success',200);
-});
+// Route::post('uploadfile',function(){
+// 	return response('Success',200);
+// });
+Route::post('uploadfile', 'GalleryController@uploadimage');
