@@ -49,23 +49,27 @@ class GalleryController extends Controller
         if($validator->fails()){
             return response($validator->errors()->all(), 422);
         }
-        $mimeTypes = $request->file('file')->getClientMimeType();
-        $fileSize = $request->file('file')->getClientSize();
-        $filename ='gallery_'.$galleryId.'_'.uniqid().'.'.$request->file('file')->guessClientExtension();
-        $path = $request->file('file')->store('file');
-        $file = File::create([
-            'file_name' => $filename,
-            'mime_type' => $mimeTypes,
-            'file_size' => $fileSize,
-            'file_path' => $path,
-             'type' => 'local',
-        ]);
-        DB::table('gallery_images')->insert([
-            'gallery_id' => $galleryId,
-            'file_id' => $file->id,
-        ]);
-        $fileImg = File::find($file->id);
-        $fileImg->status = 1;
-        $fileImg->save();
+        // $mimeTypes = $request->file('file')->getClientMimeType();
+        // $fileSize = $request->file('file')->getClientSize();
+        // $filename ='gallery_'.$galleryId.'_'.uniqid().'.'.$request->file('file')->guessClientExtension();
+        // $path = $request->file('file')->store('file');
+        // $file = File::create([
+        //     'file_name' => $filename,
+        //     'mime_type' => $mimeTypes,
+        //     'file_size' => $fileSize,
+        //     'file_path' => $path,
+        //      'type' => 'local',
+        // ]);
+        // DB::table('gallery_images')->insert([
+        //     'gallery_id' => $galleryId,
+        //     'file_id' => $file->id,
+        // ]);
+        // $fileImg = File::find($file->id);
+        // $fileImg->status = 1;
+        // $fileImg->save();
+        
+        $fileObj = new File;
+        $fileUpload = $fileObj->uploadimagesmode($request);
+        return response($fileUpload, 201);
     }
 }
