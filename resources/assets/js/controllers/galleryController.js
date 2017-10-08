@@ -1,4 +1,4 @@
-apps.controller('galleryController',['$scope','$location','galleryModel','$routeParams',function($scope,$location,galleryModel,$routeParams){
+apps.controller('galleryController',['$scope','$location','galleryModel','$routeParams', 'Lightbox',function($scope,$location,galleryModel,$routeParams, Lightbox){
 		galleryModel.getAllGalleries().then(function(response) {
            $scope.galleries = response.data;
          
@@ -6,8 +6,16 @@ apps.controller('galleryController',['$scope','$location','galleryModel','$route
         if($routeParams.id){
         	galleryModel.getGalleryById($routeParams.id).then(function(response) {
 	           $scope.singleGallery = response.data;
+	          
 	        });
         }
+        //emit dispatches an event name upwards through the scope hierarchy and notify to the registered $rootScope.Scope listeners. against broadcast
+        
+         $scope.$on('imageAdded', function(event, args) {
+            $scope.singleGallery = args;
+          
+            $scope.$apply();
+        });
 		angular.extend($scope,{
 			newGallery:{},
 			errorDiv:false,
@@ -23,7 +31,8 @@ apps.controller('galleryController',['$scope','$location','galleryModel','$route
                         formData.append('galleryId', $routeParams.id);
                     },
                     'success': function(file, response) {
-                       
+                        $scope.singleGallery.images.push(response);
+                        $scope.$emit('imageAdded', $scope.singleGallery);
                     }
                 }
             }
@@ -48,6 +57,20 @@ apps.controller('galleryController',['$scope','$location','galleryModel','$route
 				}
 
 			},
-			
+			 openLightboxModal: function(index) {
+                Lightbox.openModal($scope.singleGallery.images, index);
+            },
+            deleteImage:function(imageId){
+            	var data= {
+					imageId:imageId,
+					galleryId:$routeParams.id
+				};
+				galleryModel.deleteSinglegallery(data).then(function(response) {	
+		            $scope.singleGallery = response.data;
+		          
+		        });
+            	
+            	
+            },
 		});
 }]);

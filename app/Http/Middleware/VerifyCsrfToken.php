@@ -13,6 +13,6 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         //
-    	'galleryadd','auth','uploadfile',
+    	'galleryadd','auth','uploadfile','delete-single-image'
     ];
 }

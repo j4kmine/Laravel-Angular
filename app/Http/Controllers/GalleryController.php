@@ -18,7 +18,9 @@ class GalleryController extends Controller
     }
     public function show($id){
        
-         return Gallery::where('id', $id)->first();
+         //return Gallery::where('id', $id)->first();
+        $galleryObj = new Gallery;
+       return  $galleryObj->getSingleGallery($id);
 
     }
     public function add(Request $request)
@@ -71,5 +73,27 @@ class GalleryController extends Controller
         $fileObj = new File;
         $fileUpload = $fileObj->uploadimagesmode($request);
         return response($fileUpload, 201);
+    }
+    function deleteSingleImage(Request $request){
+         $imageId = $request->input('imageId');
+         $galleryId = $request->input('galleryId');
+         try {
+            DB::beginTransaction();
+            // delete the file from the files table
+            $file = File::findOrFail($imageId);
+            $file->delete();
+            // remove the entry from the gallery image pivot table
+            DB::table('gallery_images')->where('file_id', $file->id)->delete();
+            // delete the actual image from S3
+            Storage::delete("gallery_{$galleryId}/main/".$file->file_name);
+            Storage::delete("gallery_{$galleryId}/medium/".$file->file_name);
+            Storage::delete("gallery_{$galleryId}/thumb/".$file->file_name);
+            DB::commit();
+        } catch (\PDOException $e) {
+            DB::rollBack();
+        }
+        $galleryObj = new Gallery;
+       
+        return response($this->show($galleryId), 200);
     }
 }

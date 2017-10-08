@@ -58,6 +58,20 @@ apps.factory('galleryModel',['$http',function($http){
 		},
 		getGalleryById:function(id){
 			return $http.get(baseUrl +'galleryget/' + id);
+		},
+		deleteSinglegallery:function(data){
+			return $http({
+				headers:{
+					'Content-Type' : 'application/json',
+					
+				},
+				url : baseUrl +'delete-single-image',
+				method:'POST',
+				data:{
+					imageId:data.imageId,
+					galleryId:data.galleryId
+				}			
+			});		
 		}
 	};
 }])

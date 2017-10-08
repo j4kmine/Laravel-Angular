@@ -22,3 +22,4 @@ Route::get('galleryget/{user}','GalleryController@show');
 // 	return response('Success',200);
 // });
 Route::post('uploadfile', 'GalleryController@uploadimage');
+Route::post('delete-single-image', 'GalleryController@deleteSingleImage');

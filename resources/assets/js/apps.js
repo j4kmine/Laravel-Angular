@@ -1,4 +1,4 @@
-var apps = angular.module('myApp',['ngRoute','ngCookies']);
+var apps = angular.module('myApp',['ngRoute','ngCookies',, 'ui.bootstrap', 'bootstrapLightbox', 'angular-loading-bar']);
 apps.config(['$routeProvider','$locationProvider',function($routeProvider,$locationProvider){
 	$routeProvider.when('/',{
 		templateUrl:'templates/users/login.html',
