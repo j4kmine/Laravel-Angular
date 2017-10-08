@@ -46,9 +46,9 @@ class File extends Model
         return [
             'file' => $fileImg,
             'file_id' => $file->id,
-            'thumbUrl' => env('APP_URL') .'/blog/storage'. "/app/gallery_{$galleryId}/thumb/" . $filename,
-            'url' => env('APP_URL') .'/blog/storage'. "/app/gallery_{$galleryId}/medium/" . $filename,
-             'main' => env('APP_URL') .'/blog/storage'. "/app/gallery_{$galleryId}/main/" . $filename,
+            'thumbUrl' => env('APP_URL') .'/storage'. "/app/gallery_{$galleryId}/thumb/" . $filename,
+            'url' => env('APP_URL') .'/storage'. "/app/gallery_{$galleryId}/medium/" . $filename,
+             'main' => env('APP_URL') .'/storage'. "/app/gallery_{$galleryId}/main/" . $filename,
         ];
 	 }
 }

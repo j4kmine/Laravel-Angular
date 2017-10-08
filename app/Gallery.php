@@ -23,9 +23,9 @@ class Gallery extends Model
     	foreach ($file as $key => $value) {
     		$finalData[$key]=[
     			'file_id'=>$value->id,
-    			  'thumbUrl' => env('APP_URL') .'/blog/storage'. "/app/gallery_{$galleryid}/thumb/" . $value->file_name,
-            	  'url' => env('APP_URL') .'/blog/storage'. "/app/gallery_{$galleryid}/medium/" . $value->file_name,
-                   'main' => env('APP_URL') .'/blog/storage'. "/app/gallery_{$galleryid}/main/" . $value->file_name,
+    			  'thumbUrl' => env('APP_URL') .'/storage'. "/app/gallery_{$galleryid}/thumb/" . $value->file_name,
+            	  'url' => env('APP_URL') .'/storage'. "/app/gallery_{$galleryid}/medium/" . $value->file_name,
+                   'main' => env('APP_URL') .'/storage'. "/app/gallery_{$galleryid}/main/" . $value->file_name,
     		];
     	}
     	return $finalData;

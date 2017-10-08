@@ -72,17 +72,18 @@ apps.controller('navController',['$scope','userModel','$location',function($scop
         }
 	});
 }]);
-apps.controller('galleryController',['$scope','$location','galleryModel','$routeParams', 'Lightbox',function($scope,$location,galleryModel,$routeParams, Lightbox){
-		galleryModel.getAllGalleries().then(function(response) {
-           $scope.galleries = response.data;
-         
-        });
-        if($routeParams.id){
-        	galleryModel.getGalleryById($routeParams.id).then(function(response) {
-	           $scope.singleGallery = response.data;
-	          
-	        });
+apps.controller('galleryController',['$scope','$location','galleryModel','$routeParams', 'Lightbox','data',function($scope,$location,galleryModel,$routeParams, Lightbox,data){
+		
+        if(data && data.galleries != undefined){
+        	data.galleries.success(function(response){
+        		 $scope.galleries = response.data;
+        	});
         }
+        if(data && data.singleGallery != undefined){
+        	data.singleGallery.success(function(response){
+        		  $scope.singleGallery = response.data;
+        	});
+        }        
         //emit dispatches an event name upwards through the scope hierarchy and notify to the registered $rootScope.Scope listeners. against broadcast
         
          $scope.$on('imageAdded', function(event, args) {

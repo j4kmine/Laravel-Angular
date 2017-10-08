@@ -12,17 +12,36 @@ apps.config(['$routeProvider','$locationProvider',function($routeProvider,$locat
 	$routeProvider.when('/gallery/view',{
 		templateUrl:'templates/gallery/gallery-view.html',
 		controller:'galleryController',
-		authenticated:true
+		authenticated:true,
+		resolve:{
+			data:function(galleryModel){
+				return {
+					galleries:galleryModel.getAllGalleries()
+				};
+			}
+		}
 	});
 	$routeProvider.when('/gallery/view/:id',{
 		templateUrl:'templates/gallery/gallery-single.html',
 		controller:'galleryController',
-		authenticated:true
+		authenticated:true,
+		resolve:{
+			data:function(galleryModel,$route){
+				return {
+					singleGallery:galleryModel.getGalleryById($route.current.params.id)
+				}
+			}
+		}
 	});
 	$routeProvider.when('/gallery/add',{
 		templateUrl:'templates/gallery/gallery-add.html',
 		controller:'galleryController',
-		authenticated:true
+		authenticated:true,
+		resolve:{
+			data:function(){
+				return 'single';
+			}
+		}
 	});
 	$routeProvider.when('/logout',{
 		templateUrl:'templates/users/logout.html',
