@@ -1,12 +1,17 @@
 apps.controller('galleryController',['$scope','$location','galleryModel','$routeParams', 'Lightbox','data',function($scope,$location,galleryModel,$routeParams, Lightbox,data){
 		
         if(data && data.galleries != undefined){
-        	data.galleries.success(function(response){
-        		 $scope.galleries = response.data;
-        	});
+            data.galleries.then(function(response) {
+               $scope.galleries = response.data;
+
+            });
+          
+        	// data.galleries.success(function(response){
+        	// 	 $scope.galleries = response.data;
+        	// });
         }
         if(data && data.singleGallery != undefined){
-        	data.singleGallery.success(function(response){
+        	data.singleGallery.then(function(response){
         		  $scope.singleGallery = response.data;
         	});
         }        
